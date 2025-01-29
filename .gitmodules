@@ -7,3 +7,6 @@
 [submodule "Components/joystick"]
 	path = Components/joystick
 	url = git@github.com:phonght32/joystick.git
+[submodule "Components/mcu_port"]
+	path = Components/mcu_port
+	url = git@github.com:phonght32/mcu_port.git
