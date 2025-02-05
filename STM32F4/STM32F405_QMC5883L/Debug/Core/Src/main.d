@@ -26,7 +26,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
+ ../Core/Inc/i2c.h ../Core/Inc/main.h ../Core/Inc/usart.h \
+ ../Core/Inc/gpio.h \
+ /home/phong/Documents/Firmware/Demo_STM32/STM32F4/STM32F405_QMC5883L/../../Components/qmc5883l/qmc5883l.h \
+ /home/phong/Documents/Firmware/Demo_STM32/STM32F4/STM32F405_QMC5883L/../../Components/mcu_port/err_code.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -56,3 +60,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+../Core/Inc/i2c.h:
+../Core/Inc/main.h:
+../Core/Inc/usart.h:
+../Core/Inc/gpio.h:
+/home/phong/Documents/Firmware/Demo_STM32/STM32F4/STM32F405_QMC5883L/../../Components/qmc5883l/qmc5883l.h:
+/home/phong/Documents/Firmware/Demo_STM32/STM32F4/STM32F405_QMC5883L/../../Components/mcu_port/err_code.h:
