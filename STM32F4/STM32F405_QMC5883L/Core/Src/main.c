@@ -131,7 +131,7 @@ int main(void)
         qmc5883l_get_mag_raw(qmc5883l_handle, &mag_x, &max_y, &mag_z);
 
         uint8_t log_buf[100];
-        sprintf((char *)log_buf, "\r\nmag_x: %i\tmag_y: %i\tmag_z: %i", mag_x, max_y, mag_z);
+        sprintf((char *)log_buf, "\r\n%i,%i,%i", mag_x, max_y, mag_z);
         hw_intf_uart_debug_send(log_buf);
 
         HAL_Delay(100);
