@@ -36,10 +36,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define I2C_ADDR_QMC5883L               (QMC5883L_I2C_ADDR<<1)
-#define QMC5883L_I2C                    hi2c2
+#define I2C_ADDR_QMC5883L                   (QMC5883L_I2C_ADDR<<1)
+#define QMC5883L_I2C                        hi2c2
 
-#define UART_DEBUG                      huart1
+#define UART_DEBUG                          huart1
 
 #define CONFIG_QMC5883L_RANGE               QMC5883L_RANGE_8G
 #define CONFIG_QMC5883L_OPR_MODE            QMC5883L_OPR_MODE_CONTINUOUS
@@ -57,7 +57,6 @@
 
 /* USER CODE BEGIN PV */
 qmc5883l_handle_t qmc5883l_handle;
-int16_t mag_x = 0, max_y = 0, mag_z = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -112,26 +111,43 @@ int main(void)
         .data_rate      = CONFIG_QMC5883L_DATA_RATE,
         .sample_rate    = CONFIG_QMC5883L_SAMPLES,
         .intr_en        = CONFIG_QMC5883L_INTR_ENABLE,
-        .mag_bias_x     = 0,
-        .mag_bias_y     = 0,
-        .mag_bias_z     = 0,
+        .hard_bias_x     = 154.7851961238576,
+        .hard_bias_y     = -12.923460697083387,
+        .hard_bias_z     = -16.002331463439372,
+        .soft_bias_c11   = 0.6232115045089357,
+        .soft_bias_c12   = 0.004997471269166363,
+        .soft_bias_c13   = 0.022147854060797133,
+        .soft_bias_c21   = 0.004997471269166429,
+        .soft_bias_c22   = 0.6324010352739647,
+        .soft_bias_c23   = -0.00080240879779977,
+        .soft_bias_c31   = 0.02214785406079713,
+        .soft_bias_c32   = -0.000802408797799873,
+        .soft_bias_c33   = 0.7179876576597246,
         .i2c_send       = hw_intf_qmc5883l_i2c_send,
         .i2c_recv       = hw_intf_qmc5883l_i2c_recv,
         .delay          = HAL_Delay
     };
     qmc5883l_set_config(qmc5883l_handle, qmc5883l_cfg);
     qmc5883l_config(qmc5883l_handle);
-//  qmc5883l_auto_calib(qmc5883l_handle);
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     while (1)
     {
-        qmc5883l_get_mag_raw(qmc5883l_handle, &mag_x, &max_y, &mag_z);
+
+        // int16_t raw_mag_x = 0, raw_max_y = 0, raw_mag_z = 0;
+        // qmc5883l_get_mag_raw(qmc5883l_handle, &raw_mag_x, &raw_max_y, &raw_mag_z);
+
+        // uint8_t log_buf[100];
+        // sprintf((char *)log_buf, "\n%i,%i,%i", raw_mag_x, raw_max_y, raw_mag_z);
+        // hw_intf_uart_debug_send(log_buf);
+
+        float calib_mag_x = 0, calib_max_y = 0, calib_mag_z = 0;
+        qmc5883l_get_mag_calib(qmc5883l_handle, &calib_mag_x, &calib_max_y, &calib_mag_z);
 
         uint8_t log_buf[100];
-        sprintf((char *)log_buf, "\r\n%i,%i,%i", mag_x, max_y, mag_z);
+        sprintf((char *)log_buf, "\n%f,%f,%f", calib_mag_x, calib_max_y, calib_mag_z);
         hw_intf_uart_debug_send(log_buf);
 
         HAL_Delay(100);
