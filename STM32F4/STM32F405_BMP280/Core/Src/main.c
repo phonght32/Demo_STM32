@@ -37,10 +37,18 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define BMP280_I2C                      hi2c2
-#define I2C_ADDR_BMP280                 (BMP280_I2C_ADDR_0<<1)
+#define CONFIG_BMP280_OPR_MODE              BMP280_OPR_MODE_NORMAL
+#define CONFIG_BMP280_FILTER                BMP280_FILTER_OFF
+#define CONFIG_BMP280_OVER_SAMPLING_TEMP    BMP280_OVER_SAMPLING_STANDARD
+#define CONFIG_BMP280_OVER_SAMPLING_HUMD    BMP280_OVER_SAMPLING_STANDARD
+#define CONFIG_BMP280_OVER_SAMPLING_PRES    BMP280_OVER_SAMPLING_STANDARD
+#define CONFIG_BMP280_STANDBY_TIME          BMP280_STANDBY_TIME_0_5MS
+#define CONFIG_BMP280_COMM_MODE             BMP280_COMM_MODE_I2C
 
-#define UART_DEBUG                      huart1
+#define BMP280_I2C                          hi2c2
+#define I2C_ADDR_BMP280                     (BMP280_I2C_ADDR_0<<1)
+
+#define UART_DEBUG                          huart1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -101,16 +109,16 @@ int main(void)
     MX_USART1_UART_Init();
     /* USER CODE BEGIN 2 */
     bmp280_cfg_t bmp280_cfg = {
-        .opr_mode = BMP280_OPR_MODE_NORMAL,
-        .filter = BMP280_FILTER_OFF,
-        .over_sampling_pressure = BMP280_OVER_SAMPLING_STANDARD,
-        .over_sampling_temperature = BMP280_OVER_SAMPLING_STANDARD,
-        .over_sampling_humidity = BMP280_OVER_SAMPLING_STANDARD,
-        .standby_time = BMP280_STANDBY_TIME_250_0MS,
-        .comm_mode = BMP280_COMM_MODE_I2C,
-        .i2c_send = hw_intf_bmp280_i2c_send,
-        .i2c_recv = hw_intf_bmp280_i2c_recv,
-        .delay = HAL_Delay,
+        .opr_mode                   = CONFIG_BMP280_OPR_MODE,
+        .filter                     = CONFIG_BMP280_FILTER,
+        .over_sampling_pressure     = CONFIG_BMP280_OVER_SAMPLING_PRES,
+        .over_sampling_temperature  = CONFIG_BMP280_OVER_SAMPLING_TEMP,
+        .over_sampling_humidity     = CONFIG_BMP280_OVER_SAMPLING_HUMD,
+        .standby_time               = CONFIG_BMP280_STANDBY_TIME,
+        .comm_mode                  = CONFIG_BMP280_COMM_MODE,
+        .i2c_send                   = hw_intf_bmp280_i2c_send,
+        .i2c_recv                   = hw_intf_bmp280_i2c_recv,
+        .delay                      = HAL_Delay,
     };
     bmp280_handle = bmp280_init();
     bmp280_set_config(bmp280_handle, bmp280_cfg);
@@ -130,7 +138,7 @@ int main(void)
         // float altitude = 0.0;
         // bmp280_get_altitude(bmp280_handle, &altitude);
 
-        HAL_Delay(1000);
+        HAL_Delay(25);
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
