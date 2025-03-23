@@ -29,4 +29,11 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>bmp280</name>
+			<type>2</type>
+			<location>C:/Data/Firmware/Demo_STM32/Components/bmp280</location>
+		</link>
+	</linkedResources>
 </projectDescription>
