@@ -52,8 +52,6 @@
 
 /* USER CODE BEGIN PV */
 bmp280_handle_t bmp280_handle = NULL;
-float pressure = 0.0;
-float altitude = 0.0;
 uint8_t log_buf[100];
 /* USER CODE END PV */
 
@@ -123,11 +121,14 @@ int main(void)
     /* USER CODE BEGIN WHILE */
     while (1)
     {
-        // bmp280_get_pressure(bmp280_handle, &pressure);
-        bmp280_get_altitude(bmp280_handle, &altitude);
+        float pressure = 0.0;
+        bmp280_get_pressure(bmp280_handle, &pressure);
 
-        sprintf((char *)log_buf, "%f\n", altitude);
+        sprintf((char *)log_buf, "0,0,0,0,0,0,0,0,0,%f\n", pressure);
         hw_intf_uart_debug_send(log_buf);
+
+        // float altitude = 0.0;
+        // bmp280_get_altitude(bmp280_handle, &altitude);
 
         HAL_Delay(1000);
         /* USER CODE END WHILE */
