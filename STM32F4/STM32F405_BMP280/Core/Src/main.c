@@ -24,7 +24,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdio.h"
+#include "string.h"
+#include "err_code.h"
+#include "bmp280.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -34,7 +37,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define BMP280_I2C                      hi2c2
+#define I2C_ADDR_BMP280                 (BMP280_I2C_ADDR_0<<1)
 
+#define UART_DEBUG                      huart1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -45,13 +51,18 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+bmp280_handle_t bmp280_handle = NULL;
+float pressure = 0.0;
+float altitude = 0.0;
+uint8_t log_buf[100];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+err_code_t hw_intf_bmp280_i2c_send(uint8_t reg_addr, uint8_t *buf, uint16_t len);
+err_code_t hw_intf_bmp280_i2c_recv(uint8_t reg_addr, uint8_t *buf, uint16_t len);
+err_code_t hw_intf_uart_debug_send(uint8_t *log_buf);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -91,13 +102,34 @@ int main(void)
     MX_I2C2_Init();
     MX_USART1_UART_Init();
     /* USER CODE BEGIN 2 */
-
+    bmp280_cfg_t bmp280_cfg = {
+        .opr_mode = BMP280_OPR_MODE_NORMAL,
+        .filter = BMP280_FILTER_OFF,
+        .over_sampling_pressure = BMP280_OVER_SAMPLING_STANDARD,
+        .over_sampling_temperature = BMP280_OVER_SAMPLING_STANDARD,
+        .over_sampling_humidity = BMP280_OVER_SAMPLING_STANDARD,
+        .standby_time = BMP280_STANDBY_TIME_250_0MS,
+        .comm_mode = BMP280_COMM_MODE_I2C,
+        .i2c_send = hw_intf_bmp280_i2c_send,
+        .i2c_recv = hw_intf_bmp280_i2c_recv,
+        .delay = HAL_Delay,
+    };
+    bmp280_handle = bmp280_init();
+    bmp280_set_config(bmp280_handle, bmp280_cfg);
+    bmp280_config(bmp280_handle);
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     while (1)
     {
+        // bmp280_get_pressure(bmp280_handle, &pressure);
+        bmp280_get_altitude(bmp280_handle, &altitude);
+
+        sprintf((char *)log_buf, "%f\n", altitude);
+        hw_intf_uart_debug_send(log_buf);
+
+        HAL_Delay(1000);
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
@@ -152,7 +184,38 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+err_code_t hw_intf_bmp280_i2c_send(uint8_t reg_addr, uint8_t *buf, uint16_t len)
+{
+    uint8_t buf_send[len + 1];
+    buf_send[0] = reg_addr;
+    for (uint8_t i = 0; i < len; i++)
+    {
+        buf_send[i + 1] = buf[i];
+    }
 
+    HAL_I2C_Master_Transmit(&BMP280_I2C, I2C_ADDR_BMP280, buf_send, len + 1, 100);
+
+    return ERR_CODE_SUCCESS;
+}
+
+err_code_t hw_intf_bmp280_i2c_recv(uint8_t reg_addr, uint8_t *buf, uint16_t len)
+{
+    uint8_t buffer[1];
+    buffer[0] = reg_addr;
+
+    HAL_I2C_Master_Transmit(&BMP280_I2C, I2C_ADDR_BMP280, buffer, 1, 100);
+    HAL_I2C_Master_Receive(&BMP280_I2C, I2C_ADDR_BMP280, buf, len, 100);
+
+    return ERR_CODE_SUCCESS;
+}
+
+err_code_t hw_intf_uart_debug_send(uint8_t *log_buf)
+{
+    uint16_t len = strlen((char*)log_buf);
+    HAL_UART_Transmit(&UART_DEBUG, (uint8_t*)log_buf, len, 100);
+
+    return ERR_CODE_SUCCESS;
+}
 /* USER CODE END 4 */
 
 /**
