@@ -16,3 +16,6 @@
 [submodule "Components/bmp280"]
 	path = Components/bmp280
 	url = git@github.com:phonght32/bmp280.git
+[submodule "Components/kalman_height_estimation"]
+	path = Components/kalman_height_estimation
+	url = git@github.com:phonght32/kalman_height_estimation.git
