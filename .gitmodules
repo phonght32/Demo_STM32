@@ -16,9 +16,3 @@
 [submodule "Components/bmp280"]
 	path = Components/bmp280
 	url = git@github.com:phonght32/bmp280.git
-[submodule "Components/kalman_baro_accel"]
-	path = Components/kalman_baro_accel
-	url = git@github.com:phonght32/kalman_baro_accel.git
-[submodule "Components/C_Linear_Algebra"]
-	path = Components/C_Linear_Algebra
-	url = git@github.com:phonght32/C_Linear_Algebra.git
