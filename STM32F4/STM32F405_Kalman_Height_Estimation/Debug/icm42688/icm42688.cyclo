@@ -1,0 +1,14 @@
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:168:19:icm42688_send	4
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:193:19:icm42688_recv	4
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:220:19:icm42688_set_bank	2
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:236:19:icm42688_init	2
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:247:12:icm42688_set_config	14
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:333:12:icm42688_config	3
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:391:12:icm42688_reset	2
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:407:12:icm42688_get_accel_raw	2
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:428:12:icm42688_get_accel_calib	5
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:449:12:icm42688_get_accel_scale	5
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:470:12:icm42688_get_gyro_raw	2
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:491:12:icm42688_get_gyro_calib	5
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:513:12:icm42688_get_gyro_scale	5
+C:/Data/Firmware/Demo_STM32/Components/icm42688/icm42688.c:534:12:icm42688_auto_calib	5

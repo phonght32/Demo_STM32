@@ -1,0 +1,9 @@
+C:/Data/Firmware/Demo_STM32/Components/bmp280/bmp280.c:81:19:bmp280_send	4
+C:/Data/Firmware/Demo_STM32/Components/bmp280/bmp280.c:109:19:bmp280_recv	4
+C:/Data/Firmware/Demo_STM32/Components/bmp280/bmp280.c:136:19:bmp280_compensate_temperature	1
+C:/Data/Firmware/Demo_STM32/Components/bmp280/bmp280.c:148:19:bmp280_compensate_pressure	3
+C:/Data/Firmware/Demo_STM32/Components/bmp280/bmp280.c:175:17:bmp280_init	2
+C:/Data/Firmware/Demo_STM32/Components/bmp280/bmp280.c:186:12:bmp280_set_config	2
+C:/Data/Firmware/Demo_STM32/Components/bmp280/bmp280.c:211:12:bmp280_config	6
+C:/Data/Firmware/Demo_STM32/Components/bmp280/bmp280.c:302:12:bmp280_get_pressure	2
+C:/Data/Firmware/Demo_STM32/Components/bmp280/bmp280.c:325:12:bmp280_convert_pressure_to_altitude	2

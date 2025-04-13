@@ -1,0 +1,11 @@
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:24:6:CLinearAlgebra_Matrix_SetValue	1
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:29:7:CLinearAlgebra_Matrix_GetValue	1
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:34:6:CLinearAlgebra_Matrix_SetData	1
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:39:25:CLinearAlgebra_Matrix_Add	3
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:59:25:CLinearAlgebra_Matrix_Subtract	3
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:79:25:CLinearAlgebra_Matrix_Multiply	4
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:106:25:CLinearAlgebra_Matrix_Transpose	3
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:125:7:CLinearAlgebra_Matrix_Determinant	7
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:164:25:CLinearAlgebra_Matrix_Cofactor	6
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:193:25:CLinearAlgebra_Matrix_Adjugate	5
+C:/Data/Firmware/Demo_STM32/Components/CLinearAlgebra/Matrix/Matrix.c:222:25:CLinearAlgebra_Matrix_Inverse	4
