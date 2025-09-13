@@ -133,7 +133,7 @@ int main(void)
         float altitude = 0.0;
 
         bmp280_get_pressure(bmp280_handle, &pressure);
-        bmp280_convert_pressure_to_altitude(bmp280_handle, pressure / 100, &altitude);
+        bmp280_convert_pressure_to_altitude(bmp280_handle, pressure, &altitude);
 
         sprintf((char *)log_buf, "%f,%f\n", pressure, altitude);
         hw_intf_uart_debug_send(log_buf);
