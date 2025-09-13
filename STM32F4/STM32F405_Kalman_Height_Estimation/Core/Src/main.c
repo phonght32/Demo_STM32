@@ -48,7 +48,7 @@
 #define CONFIG_BMP280_OPR_MODE              BMP280_OPR_MODE_NORMAL
 #define CONFIG_BMP280_FILTER                BMP280_FILTER_OFF
 #define CONFIG_BMP280_OVER_SAMPLING_TEMP    BMP280_OVER_SAMPLING_STANDARD
-#define CONFIG_BMP280_OVER_SAMPLING_HUMD    BMP280_OVER_SAMPLING_STANDARD
+#define CONFIG_BMP280_OVER_SAMPLING_HUMD    BMP280_OVER_SAMPLING_SKIPPED
 #define CONFIG_BMP280_OVER_SAMPLING_PRES    BMP280_OVER_SAMPLING_STANDARD
 #define CONFIG_BMP280_STANDBY_TIME          BMP280_STANDBY_TIME_0_5MS
 #define CONFIG_BMP280_COMM_MODE             BMP280_COMM_MODE_I2C
@@ -185,20 +185,14 @@ int main(void)
         float accel_x, accel_y, accel_z;
 
         bmp280_get_pressure(bmp280_handle, &pressure);
-        bmp280_convert_pressure_to_altitude(bmp280_handle, pressure / 100, &altitude);
+        bmp280_convert_pressure_to_altitude(bmp280_handle, pressure, &altitude);
 
         icm42688_get_accel_scale(icm42688_handle, &accel_x, &accel_y, &accel_z);
 
-        kalman_height_estimation_update(kalman_height_estimation_handle, accel_z, altitude);
+        kalman_height_estimation_update(kalman_height_estimation_handle, accel_z - 9.81f, altitude);
         kalman_height_estimation_get_height(kalman_height_estimation_handle, &altitude_kalman);
 
-//        sprintf((char *)log_buf, "\n%f,%f,%f,%f,%f,%f,%f,%f,%f,0",
-//                accel_x, accel_y, accel_z,
-//                0.0f, 0.0f, 0.0f,
-//				0.0f, 0.0f, 0.0f);
-
         sprintf((char *)log_buf, "%f,%f\n", pressure, altitude_kalman);
-
         hw_intf_uart_debug_send(log_buf);
 
         HAL_Delay(40);
